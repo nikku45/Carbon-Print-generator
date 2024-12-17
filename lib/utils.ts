@@ -1,6 +1,9 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+//const CARBON_API_KEY = process.env.CARBON_API_KEY;
+const CARBON_API_KEY = 'FIN7MnfY9U7CQqkG7q6UyQ';
+
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
@@ -55,7 +58,7 @@ export async function calculateShippingEmissions(
 		{
 			method: 'POST',
 			headers: {
-				Authorization: `Bearer ${process.env.CARBON_API_KEY}`,
+				Authorization: `Bearer ${CARBON_API_KEY}`,
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({

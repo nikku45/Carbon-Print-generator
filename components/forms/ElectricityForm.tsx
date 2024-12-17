@@ -9,10 +9,19 @@ interface ElectricityFormProps {
   data: {
     annualConsumption: number;
   };
-  onUpdate: (data: any) => void;
+  onUpdate: (data: Partial<{ annualConsumption: number }>) => void;
 }
 
 export default function ElectricityForm({ data, onUpdate }: ElectricityFormProps) {
+  const inputValue = isNaN(data.annualConsumption) ? '' : data.annualConsumption;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    onUpdate({
+      annualConsumption: value === '' ? 0 : parseFloat(value)
+    });
+  };
+
   return (
     <div className="space-y-4">
       <Card className="p-4 bg-green-50">
@@ -36,8 +45,8 @@ export default function ElectricityForm({ data, onUpdate }: ElectricityFormProps
           id="consumption"
           type="number"
           min="0"
-          value={data.annualConsumption}
-          onChange={(e) => onUpdate({ annualConsumption: parseFloat(e.target.value) })}
+          value={inputValue}
+          onChange={handleChange}
           className="border-green-200 focus:border-green-400 focus:ring-green-400"
         />
       </div>

@@ -101,7 +101,9 @@ export default function Results({ data }: ResultsProps) {
     <div className="space-y-6">
       {error && (
         <Alert variant="destructive">
-          <AlertDescription>{error}</AlertDescription>
+          <AlertDescription>
+            <pre className="whitespace-pre-wrap">{error}</pre>
+          </AlertDescription>
         </Alert>
       )}
 

@@ -1,12 +1,17 @@
 import { z } from 'zod';
 
-const CARBON_API_KEY = process.env.CARBON_API_KEY;
-
+//const CARBON_API_KEY = process.env.CARBON_API_KEY;
+const CARBON_API_KEY = 'FIN7MnfY9U7CQqkG7q6UyQ';
 const electricityEstimateSchema = z.object({
 	data: z.object({
 		id: z.string(),
 		type: z.string(),
 		attributes: z.object({
+			country: z.string(),
+			state: z.string().nullable(),
+			electricity_unit: z.string(),
+			electricity_value: z.number(),
+			estimated_at: z.string(),
 			carbon_g: z.number(),
 			carbon_lb: z.number(),
 			carbon_kg: z.number(),
@@ -49,8 +54,11 @@ export async function calculateElectricityEmissions(
 		);
 
 		if (!response.ok) {
+			const errorData = await response.json().catch(() => null);
 			throw new CarbonAPIError(
-				`API request failed: ${response.statusText}`,
+				`API request failed: ${response.statusText}. ${
+					errorData ? JSON.stringify(errorData) : ''
+				}`,
 				response.status
 			);
 		}
@@ -64,7 +72,11 @@ export async function calculateElectricityEmissions(
 		if (error instanceof CarbonAPIError) {
 			throw error;
 		}
-		throw new CarbonAPIError('Failed to calculate emissions');
+		throw new CarbonAPIError(
+			`Failed to calculate emissions: ${
+				error instanceof Error ? error.message : 'Unknown error'
+			}`
+		);
 	}
 }
 

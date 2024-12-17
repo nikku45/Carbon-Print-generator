@@ -46,8 +46,61 @@ Create a `.env.local` file in the root directory:
 
 ```env
 CARBON_API_KEY=your_carbon_interface_api_key_here
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
 ## Running the Application
 
-### Development Mode
+### Local Development
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:3000` in your browser.
+
+### Production Build
+
+```bash
+npm run build
+npm start
+```
+
+### Using Docker
+
+The application includes Docker configurations for both development and production environments.
+
+#### Development Environment
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+```
+
+This setup includes:
+
+-   Hot reloading
+-   Volume mounts for development
+-   Development-specific configurations
+
+#### Production Environment
+
+```bash
+docker-compose up --build
+```
+
+Features:
+
+-   Optimized production build
+-   Health checks
+-   Container restart policies
+-   Environment variable handling
+
+#### Docker Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+NODE_ENV=production
+CARBON_API_KEY=your_carbon_interface_api_key_here
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```

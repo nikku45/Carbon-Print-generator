@@ -5,12 +5,21 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+            target: ${NODE_ENV:-production}
         ports:
             - '3000:3000'
         environment:
-            - NODE_ENV=production
+            - NODE_ENV=${NODE_ENV:-production}
             - CARBON_API_KEY=${CARBON_API_KEY}
+            - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
         volumes:
             - .:/app
             - /app/node_modules
             - /app/.next
+        healthcheck:
+            test:
+                ['CMD', 'wget', '--spider', 'http://localhost:3000/api/health']
+            interval: 30s
+            timeout: 10s
+            retries: 3
+        restart: unless-stopped

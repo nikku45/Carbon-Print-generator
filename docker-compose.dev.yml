@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+    web:
+        build:
+            target: development
+        environment:
+            - NODE_ENV=development
+        command: npm run dev
+        ports:
+            - '3000:3000'
+        volumes:
+            - .:/app
+            - /app/node_modules
+            - /app/.next

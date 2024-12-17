@@ -8,7 +8,7 @@ import ElectricityForm from "@/components/forms/ElectricityForm";
 import ShippingForm from "@/components/forms/ShippingForm";
 import TransportationForm from "@/components/forms/TransportationForm";
 import ShoppingForm from "@/components/forms/ShoppingForm";
-import Results from "@/components/Results";
+import Results from "@/components/results/Results";
 import { StepIndicator } from "@/components/StepIndicator";
 import { NavigationButtons } from "@/components/NavigationButtons";
 import type { FootprintData } from "@/lib/api/carbon-api";

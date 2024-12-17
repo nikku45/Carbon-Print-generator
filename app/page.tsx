@@ -13,11 +13,10 @@ import { StepIndicator } from "@/components/StepIndicator";
 import { NavigationButtons } from "@/components/NavigationButtons";
 import type { FootprintData } from "@/lib/api/carbon-api";
 
-// Define step types
+//  step types
 type StepKey = 'HOUSEHOLD' | 'ELECTRICITY' | 'SHIPPING' | 'TRANSPORTATION' | 'SHOPPING' | 'RESULTS';
 type StepValue = 0 | 1 | 2 | 3 | 4 | 5;
 
-// Define step constants with proper typing
 const CALCULATOR_STEPS: Record<StepKey, StepValue> = {
   HOUSEHOLD: 0,
   ELECTRICITY: 1,

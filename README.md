@@ -88,13 +88,6 @@ This setup includes:
 docker-compose up --build
 ```
 
-Features:
-
--   Optimized production build
--   Health checks
--   Container restart policies
--   Environment variable handling
-
 #### Docker Environment Variables
 
 Create a `.env` file in the root directory:

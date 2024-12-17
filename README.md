@@ -14,7 +14,7 @@ A web application that helps users calculate their annual CO2 footprint based on
 
 -   **Framework**: Next.js 14 (App Router)
 -   **UI Components**: Shadcn UI
--   **Styling**: Tailwind CSS
+-   **Styling**: Tailwind CSS & Framer Motion
 -   **API Integration**: Carbon Interface API
 -   **Form Validation**: Zod
 -   **Charts**: Recharts

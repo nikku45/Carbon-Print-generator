@@ -1,9 +1,19 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Sora } from 'next/font/google';
 import { Providers } from '@/components/providers';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const sora = Sora({
+  subsets: ['latin'],
+  variable: '--font-sora',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
@@ -19,7 +29,7 @@ export const metadata: Metadata = {
     siteName: 'Carbon Footprint Calculator',
     images: [
       {
-        url: '/footprint-calculator-logo.png', // Make sure to add this image to your public folder
+        url: '/footprint-calculator-logo.png',
         width: 1200,
         height: 630,
         alt: 'Carbon Footprint Calculator',
@@ -30,7 +40,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Carbon Footprint Calculator',
     description: 'Calculate and understand your annual carbon footprint',
-    images: ['/footprint-calculator-logo.png'], // Same image as OpenGraph
+    images: ['/footprint-calculator-logo.png'],
   },
   robots: {
     index: true,
@@ -45,7 +55,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={`${inter.variable} ${sora.variable} font-sans antialiased`} suppressHydrationWarning>
         <Providers>
           <main className="min-h-screen">
             {children}

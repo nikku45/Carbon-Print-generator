@@ -12,6 +12,7 @@ import Results from "@/components/results/Results";
 import { StepIndicator } from "@/components/StepIndicator";
 import { NavigationButtons } from "@/components/NavigationButtons";
 import type { FootprintData } from "@/lib/api/carbon-api";
+import { motion, AnimatePresence } from "framer-motion";
 
 //  step types
 type StepKey = 'HOUSEHOLD' | 'ELECTRICITY' | 'SHIPPING' | 'TRANSPORTATION' | 'SHOPPING' | 'RESULTS';
@@ -129,33 +130,46 @@ export default function Home() {
   }, [currentStep, footprintData, updateData]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white p-6">
-      <div className="max-w-3xl mx-auto space-y-6">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-50 via-background to-background p-6">
+      <div className="max-w-3xl mx-auto space-y-8">
         <Header />
-        <Card className="p-6">
-          <div className="space-y-6">
-            <StepIndicator
-              steps={[...STEP_LABELS]}
-              currentStep={currentStep}
-              progress={progress}
-            />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
+          <Card className="p-8 shadow-lg bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-card/50">
+            <div className="space-y-8">
+              <StepIndicator
+                steps={[...STEP_LABELS]}
+                currentStep={currentStep}
+                progress={progress}
+              />
 
-            <div
-              className="min-h-[400px] py-4"
-              role="region"
-              aria-label={`Step ${currentStep + 1}: ${STEP_LABELS[currentStep]}`}
-            >
-              {renderStepComponent()}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentStep}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="min-h-[400px]"
+                  role="region"
+                  aria-label={`Step ${currentStep + 1}: ${STEP_LABELS[currentStep]}`}
+                >
+                  {renderStepComponent()}
+                </motion.div>
+              </AnimatePresence>
+
+              <NavigationButtons
+                onBack={handleBack}
+                onNext={handleNext}
+                isFirstStep={currentStep === CALCULATOR_STEPS.HOUSEHOLD}
+                isLastStep={currentStep === CALCULATOR_STEPS.RESULTS}
+              />
             </div>
-
-            <NavigationButtons
-              onBack={handleBack}
-              onNext={handleNext}
-              isFirstStep={currentStep === CALCULATOR_STEPS.HOUSEHOLD}
-              isLastStep={currentStep === CALCULATOR_STEPS.RESULTS}
-            />
-          </div>
-        </Card>
+          </Card>
+        </motion.div>
       </div>
     </div>
   );

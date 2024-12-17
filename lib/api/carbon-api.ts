@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const CARBON_API_KEY = 'FIN7MnfY9U7CQqkG7q6UyQ';
+const CARBON_API_KEY = process.env.CARBON_API_KEY;
 
 const electricityEstimateSchema = z.object({
 	data: z.object({

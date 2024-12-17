@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { calculateElectricityEmissions, CarbonAPIError } from "@/lib/carbon-api";
+import { calculateElectricityEmissions, CarbonAPIError } from "@/lib/api/carbon-api";
 import { EMISSIONS_FACTORS } from "@/lib/constants";
 import { EmissionsChart } from "./EmissionsChart";
 import { EmissionsSummary } from "./results/EmissionsSummary";

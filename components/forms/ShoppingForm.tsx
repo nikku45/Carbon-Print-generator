@@ -55,7 +55,6 @@ export default function ShoppingForm({ data, onUpdate }: ShoppingFormProps) {
             onValueChange={([value]) => onUpdate({ sustainablePurchases: value })}
             max={100}
             step={1}
-            className="[&>span]:bg-green-600"
           />
           <div className="text-sm text-muted-foreground text-center">
             {data.sustainablePurchases}% sustainable

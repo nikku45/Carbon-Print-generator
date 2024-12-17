@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Home, Users } from "lucide-react";
 import { COUNTRIES } from "@/lib/constants";
-import { InfoCard } from "../shared/InfoCard";
+import { InfoCard } from "@/components/InfoCard";
 import type { FormData, HouseholdData } from "@/lib/types/forms";
 
 export default function HouseholdForm({ data, onUpdate }: FormData<HouseholdData>) {

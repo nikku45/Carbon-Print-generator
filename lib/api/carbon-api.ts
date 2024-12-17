@@ -1,21 +1,21 @@
 import { z } from 'zod';
 
-//const CARBON_API_KEY = process.env.CARBON_API_KEY;
+// SECURITY ISSUE: API key should not be hardcoded
 const CARBON_API_KEY = 'FIN7MnfY9U7CQqkG7q6UyQ';
 const electricityEstimateSchema = z.object({
 	data: z.object({
 		id: z.string(),
 		type: z.string(),
 		attributes: z.object({
-			country: z.string(),
+			country: z.string().length(2).toLowerCase(),
 			state: z.string().nullable(),
-			electricity_unit: z.string(),
-			electricity_value: z.number(),
+			electricity_unit: z.enum(['kwh', 'mwh']),
+			electricity_value: z.number().positive(),
 			estimated_at: z.string(),
-			carbon_g: z.number(),
-			carbon_lb: z.number(),
-			carbon_kg: z.number(),
-			carbon_mt: z.number(),
+			carbon_g: z.number().nonnegative(),
+			carbon_lb: z.number().nonnegative(),
+			carbon_kg: z.number().nonnegative(),
+			carbon_mt: z.number().nonnegative(),
 		}),
 	}),
 });
@@ -29,12 +29,28 @@ export class CarbonAPIError extends Error {
 	}
 }
 
+// Keep only essential request validation
+const validateElectricityRequest = (
+	electricityValue: number,
+	country: string,
+	state?: string
+) => {
+	if (electricityValue <= 0) {
+		throw new CarbonAPIError('Electricity value must be positive');
+	}
+	if (country.length !== 2) {
+		throw new CarbonAPIError('Country must be a 2-letter code');
+	}
+};
+
 export async function calculateElectricityEmissions(
 	electricityValue: number,
 	country: string,
 	state?: string
 ): Promise<ElectricityEstimate> {
 	try {
+		validateElectricityRequest(electricityValue, country, state);
+
 		const response = await fetch(
 			'https://www.carboninterface.com/api/v1/estimates',
 			{
@@ -47,31 +63,44 @@ export async function calculateElectricityEmissions(
 					type: 'electricity',
 					electricity_unit: 'kwh',
 					electricity_value: electricityValue,
-					country,
-					state,
+					country: country.toLowerCase(),
+					state: state?.toLowerCase(),
 				}),
 			}
 		);
 
 		if (!response.ok) {
 			const errorData = await response.json().catch(() => null);
+			console.error('API Error Response:', errorData);
 			throw new CarbonAPIError(
-				`API request failed: ${response.statusText}. ${
-					errorData ? JSON.stringify(errorData) : ''
-				}`,
+				`API request failed (${response.status}): ${
+					response.statusText
+				}. ${errorData ? JSON.stringify(errorData) : ''}`,
 				response.status
 			);
 		}
 
 		const data = await response.json();
-		return electricityEstimateSchema.parse(data);
-	} catch (error) {
-		if (error instanceof z.ZodError) {
-			throw new CarbonAPIError('Invalid API response format');
+		console.debug('API Response:', data); // Help debug schema issues
+
+		try {
+			return electricityEstimateSchema.parse(data);
+		} catch (e) {
+			if (e instanceof z.ZodError) {
+				console.error('Validation errors:', e.errors);
+				throw new CarbonAPIError(
+					`Invalid API response format: ${e.errors
+						.map((err) => err.message)
+						.join(', ')}`
+				);
+			}
+			throw e;
 		}
+	} catch (error) {
 		if (error instanceof CarbonAPIError) {
 			throw error;
 		}
+		console.error('API Call Error:', error);
 		throw new CarbonAPIError(
 			`Failed to calculate emissions: ${
 				error instanceof Error ? error.message : 'Unknown error'
@@ -85,16 +114,16 @@ const shippingEstimateSchema = z.object({
 		id: z.string(),
 		type: z.string(),
 		attributes: z.object({
-			carbon_g: z.number(),
-			carbon_lb: z.number(),
-			carbon_kg: z.number(),
-			carbon_mt: z.number(),
-			distance_value: z.string(),
-			distance_unit: z.string(),
-			weight_value: z.string(),
-			weight_unit: z.string(),
-			transport_method: z.string(),
+			weight_value: z.number().positive(),
+			weight_unit: z.enum(['g', 'lb', 'kg', 'mt']),
+			distance_value: z.number().positive(),
+			distance_unit: z.enum(['km', 'mi']),
+			transport_method: z.enum(['ship', 'train', 'truck', 'plane']),
 			estimated_at: z.string(),
+			carbon_g: z.number().nonnegative(),
+			carbon_lb: z.number().nonnegative(),
+			carbon_kg: z.number().nonnegative(),
+			carbon_mt: z.number().nonnegative(),
 		}),
 	}),
 });
@@ -120,31 +149,51 @@ export async function calculateShippingEmissions(
 				body: JSON.stringify({
 					type: 'shipping',
 					weight_value: weight,
-					weight_unit: weightUnit,
+					weight_unit: weightUnit.toLowerCase(),
 					distance_value: distance,
-					distance_unit: distanceUnit,
-					transport_method: transportMethod,
+					distance_unit: distanceUnit.toLowerCase(),
+					transport_method: transportMethod.toLowerCase(),
 				}),
 			}
 		);
 
 		if (!response.ok) {
+			const errorData = await response.json().catch(() => null);
+			console.error('API Error Response:', errorData);
 			throw new CarbonAPIError(
-				`API request failed: ${response.statusText}`,
+				`API request failed (${response.status}): ${
+					response.statusText
+				}. ${errorData ? JSON.stringify(errorData) : ''}`,
 				response.status
 			);
 		}
 
 		const data = await response.json();
-		return shippingEstimateSchema.parse(data);
-	} catch (error) {
-		if (error instanceof z.ZodError) {
-			throw new CarbonAPIError('Invalid API response format');
+		console.debug('Shipping API Response:', data);
+
+		try {
+			return shippingEstimateSchema.parse(data);
+		} catch (e) {
+			if (e instanceof z.ZodError) {
+				console.error('Validation errors:', e.errors);
+				throw new CarbonAPIError(
+					`Invalid API response format: ${e.errors
+						.map((err) => err.message)
+						.join(', ')}`
+				);
+			}
+			throw e;
 		}
+	} catch (error) {
 		if (error instanceof CarbonAPIError) {
 			throw error;
 		}
-		throw new CarbonAPIError('Failed to calculate shipping emissions');
+		console.error('API Call Error:', error);
+		throw new CarbonAPIError(
+			`Failed to calculate shipping emissions: ${
+				error instanceof Error ? error.message : 'Unknown error'
+			}`
+		);
 	}
 }
 
@@ -175,3 +224,20 @@ export interface FootprintData {
 		sustainablePurchases: number;
 	};
 }
+
+const electricityRequestSchema = z.object({
+	type: z.literal('electricity'),
+	electricity_unit: z.enum(['kwh', 'mwh']),
+	electricity_value: z.number().positive(),
+	country: z.string().length(2),
+	state: z.string().optional(),
+});
+
+const shippingRequestSchema = z.object({
+	type: z.literal('shipping'),
+	weight_value: z.number().positive(),
+	weight_unit: z.enum(['g', 'lb', 'kg', 'mt']),
+	distance_value: z.number().positive(),
+	distance_unit: z.enum(['km', 'mi']),
+	transport_method: z.enum(['ship', 'train', 'truck', 'plane']),
+});

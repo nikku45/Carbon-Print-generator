@@ -53,7 +53,9 @@ export default function Results({ data }: ResultsProps) {
       } catch (err) {
         const message = err instanceof CarbonAPIError
           ? err.message
-          : 'Failed to calculate emissions';
+          : err instanceof Error
+            ? `Failed to calculate emissions: ${err.message}`
+            : 'An unexpected error occurred';
         setError(message);
         setEmissions({ electricity: 0, shipping: 0 });
       } finally {

@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 //const CARBON_API_KEY = process.env.CARBON_API_KEY;
+// SECURITY ISSUE: API key should not be hardcoded will remove after task is complete
 const CARBON_API_KEY = 'FIN7MnfY9U7CQqkG7q6UyQ';
 
 export function cn(...inputs: ClassValue[]) {

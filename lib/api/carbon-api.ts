@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-// SECURITY ISSUE: API key should not be hardcoded
+//const CARBON_API_KEY = process.env.CARBON_API_KEY;
+// SECURITY ISSUE: API key should not be hardcoded will remove after task is complete
 const CARBON_API_KEY = 'FIN7MnfY9U7CQqkG7q6UyQ';
 const electricityEstimateSchema = z.object({
 	data: z.object({

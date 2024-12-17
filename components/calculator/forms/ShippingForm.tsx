@@ -28,10 +28,10 @@ const TRANSPORT_METHODS = [
 interface ShippingData {
     packagesPerYear: number;
     weight: number;
-    weightUnit: string;
+    weightUnit: 'g' | 'lb' | 'kg' | 'mt';
     distance: number;
-    distanceUnit: string;
-    transportMethod: string;
+    distanceUnit: 'km' | 'mi';
+    transportMethod: 'ship' | 'train' | 'truck' | 'plane';
 }
 
 interface ShippingFormProps {
@@ -84,7 +84,7 @@ export default function ShippingForm({ data, onUpdate }: ShippingFormProps) {
                         <Label htmlFor="weightUnit">Weight Unit</Label>
                         <Select
                             value={data.weightUnit}
-                            onValueChange={(value) => onUpdate({ weightUnit: value })}
+                            onValueChange={(value) => onUpdate({ weightUnit: value as 'g' | 'lb' | 'kg' | 'mt' })}
                         >
                             <SelectTrigger className="border-green-200 focus:border-green-400 focus:ring-green-400">
                                 <SelectValue placeholder="Select unit" />
@@ -116,7 +116,7 @@ export default function ShippingForm({ data, onUpdate }: ShippingFormProps) {
                         <Label htmlFor="distanceUnit">Distance Unit</Label>
                         <Select
                             value={data.distanceUnit}
-                            onValueChange={(value) => onUpdate({ distanceUnit: value })}
+                            onValueChange={(value) => onUpdate({ distanceUnit: value as 'km' | 'mi' })}
                         >
                             <SelectTrigger className="border-green-200 focus:border-green-400 focus:ring-green-400">
                                 <SelectValue placeholder="Select unit" />
@@ -139,7 +139,7 @@ export default function ShippingForm({ data, onUpdate }: ShippingFormProps) {
                     </Label>
                     <Select
                         value={data.transportMethod}
-                        onValueChange={(value) => onUpdate({ transportMethod: value })}
+                        onValueChange={(value) => onUpdate({ transportMethod: value as 'ship' | 'train' | 'truck' | 'plane' })}
                     >
                         <SelectTrigger className="border-green-200 focus:border-green-400 focus:ring-green-400">
                             <SelectValue placeholder="Select method" />

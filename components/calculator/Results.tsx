@@ -7,8 +7,8 @@ import { EMISSIONS_FACTORS } from "@/lib/constants";
 import { EmissionsChart } from "./EmissionsChart";
 import { EmissionsSummary } from "./results/EmissionsSummary";
 import { Recommendations } from "./results/Recommendations";
-import { Leaf, Car, ShoppingBag, Zap } from "lucide-react";
-import { calculateTreesNeeded, calculateTransportationEmissions, calculateShoppingEmissions } from "@/lib/utils";
+import { Leaf, Car, ShoppingBag, Zap, Package } from "lucide-react";
+import { calculateTreesNeeded, calculateTransportationEmissions, calculateShoppingEmissions, calculateShippingEmissions } from "@/lib/utils";
 import type { FootprintData, EmissionCategory } from "@/lib/types";
 
 interface ResultsProps {
@@ -16,32 +16,52 @@ interface ResultsProps {
 }
 
 export default function Results({ data }: ResultsProps) {
-  const [emissions, setEmissions] = useState<number | null>(null);
+  const [emissions, setEmissions] = useState<{
+    electricity: number;
+    shipping: number;
+  }>({ electricity: 0, shipping: 0 });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const calculateEmissions = async () => {
+    const calculateAllEmissions = async () => {
       try {
+        // Calculate electricity emissions
         const electricityEmissions = await calculateElectricityEmissions(
           data.electricity.annualConsumption,
           data.household.country,
           data.household.state
         );
-        setEmissions(electricityEmissions.data.attributes.carbon_mt);
+
+        // Calculate shipping emissions for each package and multiply by number of packages
+        const shippingEmissionsPerPackage = await calculateShippingEmissions(
+          data.shipping.weight,
+          data.shipping.weightUnit,
+          data.shipping.distance,
+          data.shipping.distanceUnit,
+          data.shipping.transportMethod
+        );
+
+        // Multiply single package emissions by number of packages per year
+        const totalShippingEmissions = shippingEmissionsPerPackage * data.shipping.packagesPerYear;
+
+        setEmissions({
+          electricity: electricityEmissions.data.attributes.carbon_mt,
+          shipping: totalShippingEmissions
+        });
         setError(null);
       } catch (err) {
-        const message = err instanceof CarbonAPIError 
-          ? err.message 
+        const message = err instanceof CarbonAPIError
+          ? err.message
           : 'Failed to calculate emissions';
         setError(message);
-        setEmissions(0);
+        setEmissions({ electricity: 0, shipping: 0 });
       } finally {
         setLoading(false);
       }
     };
 
-    calculateEmissions();
+    calculateAllEmissions();
   }, [data]);
 
   if (loading) {
@@ -68,7 +88,8 @@ export default function Results({ data }: ResultsProps) {
   );
 
   const categories: EmissionCategory[] = [
-    { name: "Electricity", value: emissions || 0, icon: Zap },
+    { name: "Electricity", value: emissions.electricity, icon: Zap },
+    { name: "Shipping", value: emissions.shipping, icon: Package },
     { name: "Transportation", value: transportationEmissions, icon: Car },
     { name: "Shopping", value: shoppingEmissions, icon: ShoppingBag },
   ];
@@ -84,14 +105,14 @@ export default function Results({ data }: ResultsProps) {
         </Alert>
       )}
 
-      <EmissionsSummary 
+      <EmissionsSummary
         totalEmissions={totalEmissions}
         treesNeeded={treesNeeded}
       />
 
       <EmissionsChart data={categories} />
 
-      <Recommendations 
+      <Recommendations
         categories={categories}
         totalEmissions={totalEmissions}
       />

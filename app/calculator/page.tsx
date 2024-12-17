@@ -1,7 +1,7 @@
 "use client";
-
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
+import { Header } from "@/components/calculator/Header";
 import HouseholdForm from "@/components/calculator/HouseholdForm";
 import ElectricityForm from "@/components/calculator/ElectricityForm";
 import ShippingForm from "@/components/calculator/forms/ShippingForm";
@@ -54,13 +54,7 @@ export default function Calculator() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-white p-6">
       <div className="max-w-3xl mx-auto space-y-6">
-        <div className="text-center space-y-2">
-          <h1 className="text-4xl font-bold text-green-800">Carbon Footprint Calculator</h1>
-          <p className="text-green-600">
-            Calculate your annual CO2 emissions and understand your environmental impact
-          </p>
-        </div>
-
+        <Header />
         <Card className="p-6">
           <div className="space-y-6">
             <StepIndicator
@@ -73,31 +67,31 @@ export default function Calculator() {
               {currentStep === 0 && (
                 <HouseholdForm
                   data={footprintData.household}
-                  onUpdate={(data) => updateData("household", data)}
+                  onUpdate={(data: Partial<FootprintData['household']>) => updateData("household", data)}
                 />
               )}
               {currentStep === 1 && (
                 <ElectricityForm
                   data={footprintData.electricity}
-                  onUpdate={(data) => updateData("electricity", data)}
+                  onUpdate={(data: Partial<FootprintData['electricity']>) => updateData("electricity", data)}
                 />
               )}
               {currentStep === 2 && (
                 <ShippingForm
                   data={footprintData.shipping}
-                  onUpdate={(data) => updateData("shipping", data)}
+                  onUpdate={(data: Partial<FootprintData['shipping']>) => updateData("shipping", data)}
                 />
               )}
               {currentStep === 3 && (
                 <TransportationForm
                   data={footprintData.transportation}
-                  onUpdate={(data) => updateData("transportation", data)}
+                  onUpdate={(data: Partial<FootprintData['transportation']>) => updateData("transportation", data)}
                 />
               )}
               {currentStep === 4 && (
                 <ShoppingForm
                   data={footprintData.shopping}
-                  onUpdate={(data) => updateData("shopping", data)}
+                  onUpdate={(data: Partial<FootprintData['shopping']>) => updateData("shopping", data)}
                 />
               )}
               {currentStep === 5 && <Results data={footprintData} />}

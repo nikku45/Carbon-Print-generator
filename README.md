@@ -1,6 +1,7 @@
 # Carbon Footprint Calculator
 
 A web application that helps users calculate their annual CO2 footprint based on various lifestyle factors including electricity consumption, shipping, transportation, and shopping habits.
+ To see all available qualifiers, see our attestation. A web  operation that helps  druggies calculate their periodic CO2 footmark grounded on  colorful  life factors including electricity consumption, shipping, transportation, and shopping habits. produce a. env.local  train in the root directory Visit http// localhost3000 in your cybersurfer. The  operation includes Docker configurations for both development and  product  surroundings. This setup includes produce a. env  train in the root directory
 
 ## Features
 
@@ -66,21 +67,7 @@ npm run build
 npm start
 ```
 
-### Using Docker
 
-The application includes Docker configurations for both development and production environments.
-
-#### Development Environment
-
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
-```
-
-This setup includes:
-
--   Hot reloading
--   Volume mounts for development
--   Development-specific configurations
 
 #### Production Environment
 

@@ -1,99 +1,75 @@
 # Carbon Footprint Calculator
 
-A web application that helps users calculate their annual CO2 footprint based on various lifestyle factors including electricity consumption, shipping, transportation, and shopping habits.
+## Overview
+
+The Carbon Footprint Calculator is a tool designed to help individuals and organizations estimate their carbon emissions. By understanding their environmental impact, users can take actionable steps to reduce their carbon footprint and contribute to a more sustainable future.
 
 ## Features
 
--   Multi-step form for data collection
--   Real-time CO2 calculations using Carbon Interface API
--   Visual representation of emissions data with interactive charts
--   Personalized recommendations for reducing carbon footprint
--   Responsive design for all devices
-
-## Tech Stack
-
--   **Framework**: Next.js 14 (App Router)
--   **UI Components**: Shadcn UI
--   **Styling**: Tailwind CSS & Framer Motion
--   **API Integration**: Carbon Interface API
--   **Form Validation**: Zod
--   **Charts**: Recharts
-
-## Prerequisites
-
--   Node.js 18.17 or later
--   Docker and Docker Compose (optional)
--   Carbon Interface API key ([Get one here](https://www.carboninterface.com/))
+- Calculate carbon emissions based on various activities (e.g., transportation, energy usage, waste).
+- User-friendly interface for inputting data.
+- Detailed breakdown of emissions by category.
+- Suggestions for reducing carbon emissions.
+- Export results for record-keeping or sharing.
 
 ## Installation
 
 1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/carbon-footprint-calculator.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd carbon-footprint-calculator
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```bash
-git clone https://github.com/yourusername/carbon-footprint-calculator.git
-cd carbon-footprint-calculator
-```
+## Usage
 
-2. Install dependencies:
+1. Start the application:
+   ```bash
+   npm start
+   ```
+2. Open your browser and navigate to `http://localhost:3000`.
+3. Input your data into the calculator and view your results.
 
-```bash
-npm install
-```
+## Technologies Used
 
-3. Set up environment variables:
+- **Frontend**: React, HTML, CSS
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Other Tools**: Chart.js for data visualization
 
-Create a `.env.local` file in the root directory:
+## Contributing
 
-```env
-CARBON_API_KEY=your_carbon_interface_api_key_here
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
+Contributions are welcome! Please follow these steps:
 
-## Running the Application
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add feature-name"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Open a pull request.
 
-### Local Development
+## License
 
-```bash
-npm run dev
-```
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Visit `http://localhost:3000` in your browser.
+## Contact
 
-### Production Build
+For any questions or feedback, please contact:
 
-```bash
-npm run build
-npm start
-```
-
-### Using Docker
-
-The application includes Docker configurations for both development and production environments.
-
-#### Development Environment
-
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
-```
-
-This setup includes:
-
--   Hot reloading
--   Volume mounts for development
--   Development-specific configurations
-
-#### Production Environment
-
-```bash
-docker-compose up --build
-```
-
-#### Docker Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-NODE_ENV=production
-CARBON_API_KEY=your_carbon_interface_api_key_here
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
+- **Name**: Your Name
+- **Email**: your.email@example.com
+- **GitHub**: [your-username](https://github.com/your-username)

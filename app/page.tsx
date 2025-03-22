@@ -1,6 +1,7 @@
 import Navbar from '../components/navigation/Navbar';
 import Article from '../components/ui/article';
 import Interactivebox from '../components/ui/caculator-box';
+import CommunityPage from './community/page';
 
 
 
@@ -16,6 +17,7 @@ const Home = () => {
 
                 </section>
                 <Interactivebox />
+                <CommunityPage />
             </main>
         </>
     );

@@ -21,9 +21,9 @@ export default function ShoppingForm({ data, onUpdate }: ShoppingFormProps) {
         <div className="flex items-start space-x-4">
           <ShoppingBag className="w-6 h-6 mt-1 text-green-600" />
           <div>
-            <h3 className="font-medium">Shopping Habits</h3>
+            <h3 className="font-medium">Monthly Expensses</h3>
             <p className="text-sm text-muted-foreground">
-              Your shopping choices impact your carbon footprint. Let us know about your consumption patterns.
+              Tell us about your monthly shopping expenditure on the things like furniture,clothes etc and the percentage of sustainable purchases as
             </p>
           </div>
         </div>
@@ -33,7 +33,7 @@ export default function ShoppingForm({ data, onUpdate }: ShoppingFormProps) {
         <div className="space-y-2">
           <Label htmlFor="expenditure" className="flex items-center gap-2">
             <ShoppingBag className="w-4 h-4 text-green-600" />
-            Monthly Shopping Expenditure ($)
+            Monthly Shopping Expenditure
           </Label>
           <Input
             id="expenditure"

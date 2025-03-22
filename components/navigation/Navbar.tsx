@@ -7,9 +7,10 @@ const Navbar = () => {
                 <Link href="/" style={{ textDecoration: 'none', color: '#fff', fontWeight: 'bold' }}>CarbonCounter</Link>
             </div>
             <div style={{ display: 'flex', gap: '20px' }}>
+            <Link href="/community" style={{ textDecoration: 'none', color: '#fff' }}><b>Explore communities</b></Link>
             <Link href="/Carbon-Footprint-Calculator" style={{ textDecoration: 'none', color: '#fff' }}><b>Carbon-Footprints</b></Link>
-                <Link href="/login" style={{ textDecoration: 'none', color: '#fff' }}><b>Login</b></Link>
-                <Link href="/signup" style={{ textDecoration: 'none', color: '#fff' }}><b>signup</b></Link>
+            <Link href="/login" style={{ textDecoration: 'none', color: '#fff' }}><b>Login</b></Link>
+            <Link href="/signup" style={{ textDecoration: 'none', color: '#fff' }}><b>signup</b></Link>
                
             </div>
         </nav>

@@ -6,6 +6,7 @@ export async function POST(request: Request) {
 	try {
 		const data = (await request.json()) as FootprintData;
 		const result = await calculateFootprint(data);
+		console.log("Calculated Footprint Result:", result); // Log the result
 		return NextResponse.json(result);
 	} catch (error) {
 		return NextResponse.json(

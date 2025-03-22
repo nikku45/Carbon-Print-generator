@@ -7,13 +7,15 @@ const InteractiveBox = () => {
 
     return (
         <>
-          <a href="/Carbon-Footprint-Calculator" style={{textDecoration: 'none',  }}>
-           <img src="https://img.freepik.com/free-photo/sustainable-development-goals-still-life_23-2150196699.jpg?t=st=1742602639~exp=1742606239~hmac=870e544f3e3902e925156a36b2222dd8b5d17de050610f487f247a7bb092245f&w=2000" alt="Carbon Footprint Calculator" style={{ width: '20%', marginTop: '20px',margin:"auto", }} />
-           </a>
+          
            <div
-           
+          
            style={{
+                width: '60%',
+                height: '60%',
+                margin: 'auto',
                marginTop: '2rem',
+               marginBottom: '2rem',
                cursor: 'pointer',
                display: 'flex',
                flexDirection: 'column',
@@ -34,13 +36,19 @@ const InteractiveBox = () => {
            //     e.currentTarget.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
            // }}
        >
-           <Link href="/Carbon-Footprint-Calculator" style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold', textAlign: 'center' }}>
+           <Link href="/Carbon-Footprint-Calculator" style={{ color: '#fff', fontSize: '50px', fontWeight: 'bold', textAlign: 'center' }}>
                Calculate Your Carbon Footprint
            </Link>
+           <a href="/Carbon-Footprint-Calculator" style={{textDecoration: 'none', marginTop: '1rem'}}>
+           <img src="https://img.freepik.com/premium-photo/co2-emissions-carbon-reduction-global-warming-climate-change-environment-energy-saving-sustainable-development-earth-leaf-business-industry_36325-4504.jpg?ga=GA1.1.944648832.1742602162" style={{ width: '70%', marginTop: '20px',margin:"auto", borderRadius:'10px' }} />
+           </a>
+           <a href="/Carbon-Footprint-Calculator" style={{textDecoration: 'none',fontSize:'50px', marginTop: '1rem'}}>
+           <h1>Visit Now!</h1>
+        </a>        
            <p style={{ color: '#f9f9f9', fontSize: '14px', textAlign: 'center', marginTop: '10px' }}>
                Discover how your daily activities impact the environment and explore ways to reduce your carbon footprint.
            </p>
-         
+           
        </div>
         </>
        

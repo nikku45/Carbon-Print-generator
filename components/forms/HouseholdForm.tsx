@@ -15,7 +15,7 @@ export default function HouseholdForm({ data, onUpdate }: FormData<HouseholdData
       <InfoCard
         icon={Home}
         title="Household Information"
-        description="Tell us about your household to help calculate your carbon footprint."
+        description="Give the total Number of family members on which basis you want to calculate carbon  foot print-emission by them"
       />
 
       <div className="space-y-4">

@@ -28,9 +28,9 @@ export default function ElectricityForm({ data, onUpdate }: ElectricityFormProps
         <div className="flex items-start space-x-4">
           <Lightbulb className="w-6 h-6 mt-1 text-green-600" />
           <div>
-            <h3 className="font-medium">Energy Consumption</h3>
+            <h3 className="font-medium">Electricity Consumption</h3>
             <p className="text-sm text-muted-foreground">
-              You can find your annual electricity consumption on your utility bills or by contacting your energy provider.
+              Enter your monthly electricity consumption in kilowatt-hours (kWh).
             </p>
           </div>
         </div>
@@ -39,7 +39,7 @@ export default function ElectricityForm({ data, onUpdate }: ElectricityFormProps
       <div className="space-y-2">
         <Label htmlFor="consumption" className="flex items-center gap-2">
           <Zap className="w-4 h-4 text-green-600" />
-          Annual Electricity Consumption (kWh)
+         Monthly Electricity Consumption (kWh)
         </Label>
         <Input
           id="consumption"

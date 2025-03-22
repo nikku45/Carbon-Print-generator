@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Package, Truck } from "lucide-react";
+import { Value } from "@radix-ui/react-select";
 
 const WEIGHT_UNITS = [
     { value: 'g', label: 'Grams (g)' },
@@ -19,10 +20,12 @@ const DISTANCE_UNITS = [
 ];
 
 const TRANSPORT_METHODS = [
-    { value: 'truck', label: 'Truck' },
-    { value: 'ship', label: 'Ship' },
-    { value: 'train', label: 'Train' },
-    { value: 'plane', label: 'Plane' },
+    {value: 'walk', label: 'Walk'},
+    {value: 'bike', label: 'Bike'},
+    {value: 'truck', label: 'Truck' },
+    {value: 'car', label: 'Car' },
+    {value: 'train', label: 'Train' },
+    {value: 'ev', label: 'Electric Vehicle' },
 ];
 
 interface ShippingData {
@@ -31,7 +34,7 @@ interface ShippingData {
     weightUnit: 'g' | 'lb' | 'kg' | 'mt';
     distance: number;
     distanceUnit: 'km' | 'mi';
-    transportMethod: 'ship' | 'train' | 'truck' | 'plane';
+    transportMethod: |'bike'|'ev' | 'train' | 'truck' | 'car'|'walk';
 }
 
 interface ShippingFormProps {
@@ -48,7 +51,7 @@ export default function ShippingForm({ data, onUpdate }: ShippingFormProps) {
                     <div>
                         <h3 className="font-medium">Shipping Information</h3>
                         <p className="text-sm text-muted-foreground">
-                            Tell us about your shipping habits to calculate the associated emissions.
+                            Tell us about your average bought items for groceries, Plastic and how you transport them.
                         </p>
                     </div>
                 </div>
@@ -56,7 +59,7 @@ export default function ShippingForm({ data, onUpdate }: ShippingFormProps) {
 
             <div className="grid gap-4">
                 <div className="space-y-2">
-                    <Label htmlFor="packagesPerYear">Packages Per Year</Label>
+                    <Label htmlFor="packagesPerYear">Packages Per Month</Label>
                     <Input
                         id="packagesPerYear"
                         type="number"
@@ -139,7 +142,7 @@ export default function ShippingForm({ data, onUpdate }: ShippingFormProps) {
                     </Label>
                     <Select
                         value={data.transportMethod}
-                        onValueChange={(value) => onUpdate({ transportMethod: value as 'ship' | 'train' | 'truck' | 'plane' })}
+                        onValueChange={(value) => onUpdate({ transportMethod: value as |'bike'|'ev' | 'train' | 'truck' | 'car'|'walk' })}
                     >
                         <SelectTrigger className="border-green-200 focus:border-green-400 focus:ring-green-400">
                             <SelectValue placeholder="Select method" />

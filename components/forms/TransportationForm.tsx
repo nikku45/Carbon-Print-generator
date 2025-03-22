@@ -15,6 +15,7 @@ interface TransportationFormProps {
 }
 
 export default function TransportationForm({ data, onUpdate }: TransportationFormProps) {
+  const monthlyCO2 = data.annualMileage / 12; // Calculate CO2 emissions per month
   return (
     <div className="space-y-4">
       <Card className="p-4 bg-green-50">
@@ -23,7 +24,7 @@ export default function TransportationForm({ data, onUpdate }: TransportationFor
           <div>
             <h3 className="font-medium">Transportation Details</h3>
             <p className="text-sm text-muted-foreground">
-              Tell us about your vehicle usage to calculate transportation emissions.
+              You own an electric vehicle or not and if not then how much mileage you cover monthly.
             </p>
           </div>
         </div>
@@ -33,7 +34,7 @@ export default function TransportationForm({ data, onUpdate }: TransportationFor
         <div className="flex items-center justify-between">
           <Label htmlFor="electric-car" className="flex items-center gap-2">
             <BatteryCharging className="w-4 h-4 text-green-600" />
-            Do you own an electric car?
+            Do you own an electric vehicle?
           </Label>
           <Switch
             id="electric-car"
@@ -42,21 +43,25 @@ export default function TransportationForm({ data, onUpdate }: TransportationFor
             className="data-[state=checked]:bg-green-600"
           />
         </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="mileage" className="flex items-center gap-2">
-            <Car className="w-4 h-4 text-green-600" />
-            Annual Mileage
-          </Label>
-          <Input
-            id="mileage"
-            type="number"
-            min="0"
-            value={data.annualMileage}
-            onChange={(e) => onUpdate({ annualMileage: parseFloat(e.target.value) })}
-            className="border-green-200 focus:border-green-400 focus:ring-green-400"
-          />
-        </div>
+        {!data.hasElectricCar && (
+          <div className="space-y-2">
+            <Label htmlFor="mileage" className="flex items-center gap-2">
+              <Car className="w-4 h-4 text-green-600" />
+              Annual Mileage
+            </Label>
+            <Input
+              id="mileage"
+              type="number"
+              min="0"
+              value={data.annualMileage}
+              onChange={(e) => onUpdate({ annualMileage: parseFloat(e.target.value) })}
+              className="border-green-200 focus:border-green-400 focus:ring-green-400"
+            />
+            <p className="text-sm text-muted-foreground">
+              Estimated CO2 emissions per month: {monthlyCO2.toFixed(2)} kg
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

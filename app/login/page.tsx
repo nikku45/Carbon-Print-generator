@@ -4,7 +4,7 @@ const Login = () => {
         <main className="login" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#f0f4f8' }}>
             <div className="login-container">
                 <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}><b>Log in into CarbonCounter</b></h2>
-                <form  action="/Carbon-Footprint-Calculator" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <form  action="/" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                     <input
                         type="email"
                         placeholder="Email"

@@ -3,7 +3,7 @@ const Signup = () => {
         <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#f0f4f8' }}>
             <div style={{ width: '400px', padding: '30px', background: '#fff', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
                 <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Sign Up</h2>
-                <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <form action="/Carbon-Footprint-Calculator"style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                     <input
                         type="text"
                         placeholder="Full Name"

@@ -1,9 +1,10 @@
+
 const Login = () => {
     return (
-        <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#f0f4f8' }}>
-            <div style={{ width: '400px', padding: '30px', background: '#fff', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
-                <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Login</h2>
-                <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        <main className="login" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#f0f4f8' }}>
+            <div className="login-container">
+                <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}><b>Log in into CarbonCounter</b></h2>
+                <form  action="/Carbon-Footprint-Calculator" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                     <input
                         type="email"
                         placeholder="Email"

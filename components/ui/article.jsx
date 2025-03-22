@@ -1,3 +1,4 @@
+
 const Article = () => {
     return (
         <article style={{ maxWidth: "100%", margin: '30px auto', padding: '20px', background: '#fff', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', lineHeight: '1.8' }}>
@@ -21,9 +22,9 @@ Meanwhile, environmental degradation jeopardises the health of ecosystems and th
                 <p>
                 Central to the concept of sustainability is the maintenance of ecological balance. This means ensuring that the rate of resource consumption does not outpace the natural replenishment rate. Healthy ecosystems, from forests to oceans, provide essential services such as carbon sequestration, water purification, and habitat provision. By preserving these ecosystems and promoting biodiversity, we not only safeguard the survival of countless species but also maintain the planet's capacity to support human life. Conservation, restoration, and responsible resource management are crucial actions to ensure environmental stability.
                 </p>
-                <img src="https://images.prismic.io/greenly/57ef1268-ef7a-4c45-8c1c-e4be86d331ff_train+v+car+article+image3.jpg?auto=format%2Ccompress&w=896&fit=max&dpr=3" alt="Sustainable Environment" style={{ width: '100%', borderRadius: '10px', marginTop: '20px' }} />
-
-
+                <img src="https://img.freepik.com/free-vector/ecology-infographic-with-photo_52683-36214.jpg?t=st=1742602386~exp=1742605986~hmac=bfd73f037d636ebf242f2be01c684d6719cb86ba7ee5eb13826d1bcb45dc214c&w=2000" alt="Pollution" style={{ margin:"auto"
+                     ,width: '80%', marginTop: '20px' }} />
+                <h3 style={{ fontSize: '20px', marginTop: '20px', color: '#4CAF50' }}>Social Equity</h3>
                 <h3 style={{ fontSize: '20px', marginTop: '20px', color: '#4CAF50' }}>Sustainable Economy</h3>
                 <p>
                 For sustainability initiatives to be lasting, they must also take into consideration economic sustainability. This doesn't mean prioritising profit over the environment; rather, it means finding harmony where businesses can prosper without degrading ecological systems. Sustainable economic practices look at long-term gains, taking into account the full lifecycle costs and benefits of actions. This approach often leads to innovations that reduce waste, increase efficiency, and create green jobs. A sustainable economy is one that recognises the inherent value of the environment and integrates it into its growth strategies, ensuring resilience and adaptability in a changing world.

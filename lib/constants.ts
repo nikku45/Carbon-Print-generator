@@ -1,4 +1,5 @@
 export const COUNTRIES = [
+	{code: 'IN', name: 'India'},
 	{ code: 'US', name: 'United States' },
 	{ code: 'CA', name: 'Canada' },
 	{ code: 'GB', name: 'United Kingdom' },
@@ -8,6 +9,7 @@ export const COUNTRIES = [
 	{ code: 'IT', name: 'Italy' },
 	{ code: 'AU', name: 'Australia' },
 	{ code: 'JP', name: 'Japan' },
+	
 ] as const;
 
 export const EMISSIONS_FACTORS = {

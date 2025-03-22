@@ -9,6 +9,7 @@ import { InfoCard } from "@/components/InfoCard";
 import type { FormData, HouseholdData } from "@/lib/types/forms";
 
 export default function HouseholdForm({ data, onUpdate }: FormData<HouseholdData>) {
+  
   return (
     <div className="space-y-4">
       <InfoCard

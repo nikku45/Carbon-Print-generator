@@ -32,7 +32,7 @@ type StepLabel = typeof STEP_LABELS[number];
 
 // Initial footprint data
 const INITIAL_FOOTPRINT_DATA: FootprintData = {
-  household: { size: 1, country: "US" },
+  household: { size: 1, country: "India" },
   electricity: { annualConsumption: 0, unit: 'kwh' },
   shipping: {
     packagesPerYear: 1,

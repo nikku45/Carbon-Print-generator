@@ -31,9 +31,7 @@ const Navbar = () => {
                 <a href="/Carbon-Footprint-Calculator" style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>
                     Carbon Footprints
                 </a>
-                <a href="/contact" style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>
-                    Contact Us
-                </a>
+             
                 <a href="/login" style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>
                     Login
                 </a>
